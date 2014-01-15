@@ -1,0 +1,1 @@
+!function(){var e=Handlebars.template,t=Handlebars.templates=Handlebars.templates||{};t.index=e(function(e,t,a,n,l){return this.compilerInfo=[4,">= 1.0.0"],a=this.merge(a,e.helpers),l=l||{},"<p>Welcome to NodeMavens!</p>"})}();

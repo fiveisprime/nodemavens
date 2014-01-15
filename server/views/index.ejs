@@ -13,14 +13,10 @@
     <title><%= settings.title %></title>
 
     <link rel='stylesheet' href='/styles/style.css' />
+
+    <script data-main="javascripts/app" src="/javascripts/vendor/require.js"></script>
   </head>
   <body>
     <div class="container" role="main"></div>
-
-    <script src="/javascripts/app.js"></script>
-    <script>
-      new App.Router();
-      Backbone.history.start();
-    </script>
   </body>
 </html>
