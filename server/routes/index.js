@@ -41,7 +41,7 @@ module.exports = function(app, controllers) {
         return res.json({ error: err.message });
       }
 
-      res.json({ result: true });
+      res.json(true);
     });
   });
 
@@ -54,7 +54,20 @@ module.exports = function(app, controllers) {
         res.json({ error: err.message });
       }
 
-      res.json({ result: maven });
+      res.json(maven);
+    });
+  });
+
+  //
+  // Vote for a maven.
+  //
+  app.post('/api/mavens/:id/vote', function(req, res) {
+    mavensController.vote(req.params.id, function(err, maven) {
+      if (err) {
+        res.json({ error: err.message });
+      }
+
+      res.json(maven);
     });
   });
 };
