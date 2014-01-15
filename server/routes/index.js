@@ -36,12 +36,12 @@ module.exports = function(app, controllers) {
   // Update/PUT a maven.
   //
   app.put('/api/mavens/:id', function(req, res) {
-    mavensController.update(req.params.id, req.body, function(err) {
+    mavensController.update(req.params.id, req.body, function(err, maven) {
       if (err) {
         return res.json({ error: err.message });
       }
 
-      res.json(true);
+      res.json(maven);
     });
   });
 
