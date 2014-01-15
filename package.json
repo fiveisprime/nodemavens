@@ -1,9 +1,10 @@
 {
   "name": "nodemavens",
   "version": "0.0.0",
-  "description": "An app for giving credit for those who inspire you.",
+  "description": "An app for showing appreciation for those who inspire you.",
   "main": "app.js",
   "scripts": {
+    "start": "node app",
     "test": "make test"
   },
   "repository": {

@@ -31,11 +31,8 @@ if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// var controllers = require('./server/controllers')();
-// require('./server/routes')(app, controllers);
-app.get('/', function(req, res) {
-  res.render('index');
-});
+var controllers = require('./server/controllers')();
+require('./server/routes')(app, controllers);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port', app.get('port'));

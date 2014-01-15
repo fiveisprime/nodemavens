@@ -1,7 +1,8 @@
 STYLESRC = client/styles/normalize.css client/styles/grid.css \
 	client/styles/user.css
 
-SRC = client/javascripts/app.js app.js
+SRC = client/javascripts/app.js app.js $(wildcard server/routes/*.js) \
+	$(wildcard server/controllers/*.js)
 
 TEMPLATES = $(wildcard client/templates/*.handlebars)
 CLIENTSRC = client/javascripts/vendor/jquery-min.js \
@@ -23,14 +24,16 @@ build:
 	--min
 	@echo Concatenating scripts...
 	@cat $(CLIENTSRC) > public/javascripts/app.js
-	@echo Compiling stylesheets
+	@echo Compiling stylesheets...
 	@cat $(STYLESRC) > public/styles/style.tmp.css && \
-	node_modules/.bin/myth public/styles/style.tmp.css public/styles/style.css && \
-	rm public/styles/style.tmp.css
+	node_modules/.bin/myth public/styles/style.tmp.css public/styles/style.css
+	@echo Cleaning up...
+	@rm public/styles/style.tmp.css
 	@rm public/javascripts/templates.js
 
 min:
 	@node_modules/.bin/cleancss --s0 \
 	--output public/styles/style.min.css \
 	public/styles/style.css
-	@echo Wrote public/styles/style.min.css
+
+test: lint
