@@ -1,4 +1,4 @@
-STYLESRC = styles/normalize.css styles/grid.css styles/user.css
+STYLESRC = styles/normalize.css styles/grid.css styles/nodemavens.css
 
 SRC = public/javascripts/app.js app.js $(wildcard server/routes/*.js) \
 	$(wildcard server/controllers/*.js)
@@ -11,11 +11,11 @@ lint: $(SRC)
 	@node_modules/.bin/jshint $^
 
 build:
-	@echo Compiling Handlebars templates...
+	@echo Compiling templates...
 	@node_modules/.bin/handlebars $(TEMPLATES) \
 	--output public/javascripts/templates.js \
 	--min
-	@echo Compiling stylesheets...
+	@echo Compiling styles...
 	@cat $(STYLESRC) > public/styles/style.tmp.css && \
 	node_modules/.bin/myth public/styles/style.tmp.css public/styles/style.css
 	@echo Cleaning up...

@@ -37,8 +37,48 @@ function($, Backbone, _, Handlebars) {
   App.Models = {};
   App.Views = {};
 
+  App.Views.Love = Backbone.View.extend({
+    template: Handlebars.templates.love,
+    events: {
+      'click [type=submit]': 'submit'
+    },
+    render: function() {
+      this.$el.html(this.template()).fadeIn(150);
+    },
+    submit: function() {
+      this.$el.fadeOut(200, _.bind(function() {
+        this.$el.html('');
+      }, this));
+
+      // TODO: POST to submit.
+      return false;
+    }
+  });
+
   App.Views.Index = Backbone.View.extend({
     template: Handlebars.templates.index,
+    el: document.body,
+    events: {
+      'click #love': 'spreadLove'
+    },
+    initialize: function() {
+      this.render();
+      this.loveForm = new App.Views.Love({
+        el: $('#love-form')
+      });
+    },
+    render: function() {
+      this.$el.html(this.template());
+    },
+    spreadLove: function() {
+      this.loveForm.render();
+      return false;
+    }
+  });
+
+  App.Views.About = Backbone.View.extend({
+    template: Handlebars.templates.about,
+    el: document.body,
     initialize: function() {
       this.render();
     },
@@ -49,12 +89,14 @@ function($, Backbone, _, Handlebars) {
 
   App.Router = Backbone.Router.extend({
     routes: {
-      '': 'index'
+      '': 'index',
+      'about': 'about'
     },
     index: function() {
-      new App.Views.Index({
-        el: $('[role=main]')
-      });
+      new App.Views.Index();
+    },
+    about: function() {
+      new App.Views.About();
     }
   });
 

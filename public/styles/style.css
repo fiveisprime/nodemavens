@@ -550,10 +550,152 @@ table {
   }
 }
 
+/* Variables */
+
+
+
 /* Full width */
+
+a {
+  color: #e33b7e;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #e33b7e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+em {
+  font-weight: bold;
+}
+
+.btn {
+  border: none;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  line-height: normal;
+  padding: 8px 10px;
+  background-color: #3ee49c;
+  color: #403f3f;
+}
+
+.btn:hover {
+  background-color: #40d896;
+}
+
+a.btn:hover {
+  text-decoration: none;
+}
+
+a.btn:visited {
+  color: #403f3f;
+}
+
+input[type="text"] {
+  border: 1px solid #ccc;
+  padding: 6px 4px;
+  outline: none;
+  font: 13px "Open Sans", sans-serif;
+  color: #505050;
+  margin: 0;
+  width: 210px;
+  max-width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+  background-color: #fff;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+input[type="text"]:focus {
+  border: 1px solid #aaa;
+  color: #444;
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+  box-shadow: 0 0 3px rgba(0,0,0,.2);
+}
+
+input[type="submit"] {
+  color: #FFF;
+}
+
+.full {
+  width: 85%;
+  text-align: center;
+}
+
+.btn.accent {
+  background-color: #e33b7e;
+}
+
+.btn.accent:hover {
+  background-color: #d43876;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.hero {
+  padding-top: 60px;
+  height: 250px;
+  background-color: #403f3f;
+  color: #F5F5F5;
+}
+
+.hero p {
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  margin-bottom: 10px;
+}
+
+.hero h2 {
+  margin-top: 5px;
+  color: #a36de0;
+}
+
+#love-form form {
+  position: fixed;
+  width: 45%;
+  top: 150px;
+  left: 25%;
+  padding: 20px;
+  background-color: white;
+  -webkit-box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.about {
+  margin-top: 60px;
+}
+
+.define p {
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.define h4 {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
 
 /* Mobile */
 
 @media screen and (max-width : 480px) {
-
+  .hero {
+    text-align: center;
+    padding-top: 15px;
+    height: 320px;
+  }
 }
