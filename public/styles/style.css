@@ -664,7 +664,7 @@ input[type="submit"] {
   color: #a36de0;
 }
 
-#love-form form {
+#love-form {
   position: fixed;
   top: 150px;
   left: 40%;
@@ -708,7 +708,7 @@ input[type="submit"] {
     height: 320px;
   }
 
-  #love-form form {
+  #love-form {
     width: 100%;
     top: 50px;
     left: 0;

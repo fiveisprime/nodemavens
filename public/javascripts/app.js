@@ -60,7 +60,7 @@ function($, Backbone, _, Handlebars) {
       'click [type=submit]': 'submit'
     },
     render: function() {
-      this.$el.html(this.template()).fadeIn(150);
+      this.$el.html(this.template()).center().fadeIn(150);
     },
     submit: function() {
       this.$el.fadeOut(200, _.bind(function() {

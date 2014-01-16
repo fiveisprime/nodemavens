@@ -120,7 +120,7 @@ input[type="submit"] {
   color: #a36de0;
 }
 
-#love-form form {
+#love-form {
   position: fixed;
   top: 150px;
   left: 40%;
@@ -160,13 +160,13 @@ input[type="submit"] {
     padding-top: 15px;
     height: 320px;
   }
-  
-  #love-form form {
+
+  #love-form {
     width: 100%;
     top: 50px;
     left: 0;
   }
-  
+
   #about-modal {
     width: 100%;
     top: 50px;
