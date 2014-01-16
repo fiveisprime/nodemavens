@@ -61,6 +61,7 @@ function($, Backbone, _, Handlebars) {
     },
     render: function() {
       this.$el.html(this.template()).center().fadeIn(150);
+      this.$el.find('[name=username]').focus();
     },
     submit: function() {
       this.$el.fadeOut(200, _.bind(function() {
