@@ -19,7 +19,10 @@
   "homepage": "https://github.com/fiveisprime/nodemavens",
   "dependencies": {
     "express": "~3.4.8",
-    "ejs": "~0.8.5"
+    "ejs": "~0.8.5",
+    "request": "~2.31.0",
+    "q": "~1.0.0",
+    "mongoose": "~3.8.4"
   },
   "devDependencies": {
     "clean-css": "~2.0.6",

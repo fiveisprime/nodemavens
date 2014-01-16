@@ -5,9 +5,10 @@
 //
 
 module.exports = function() {
-  var internals = {};
+  var internals = {}
+    , models    = require('../models')();
 
-  internals.mavens = require('./mavens')();
+  internals.mavens = require('./mavens')(models);
 
   return internals;
 };

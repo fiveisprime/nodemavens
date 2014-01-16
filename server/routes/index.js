@@ -22,52 +22,42 @@ module.exports = function(app, controllers) {
   //
   // GET mavens.
   //
-  app.get('/api/mavens/:id?', function(req, res) {
-    mavensController.getAll(function(err, mavens) {
-      if (err) {
-        return res.json({ error: err.message });
-      }
-
-      res.json(mavens);
-    });
-  });
-
-  //
-  // Update/PUT a maven.
-  //
-  app.put('/api/mavens/:id', function(req, res) {
-    mavensController.update(req.params.id, req.body, function(err, maven) {
-      if (err) {
-        return res.json({ error: err.message });
-      }
-
-      res.json(maven);
-    });
+  app.get('/api/mavens/:username?', function(req, res) {
+    mavensController.get(req.params.username)
+      .then(function(mavens) {
+        res.json(mavens);
+      })
+      .fail(function(err) {
+        res.json({ error: err.message });
+      })
+      .done();
   });
 
   //
   // Create/POST a maven.
   //
   app.post('/api/mavens', function(req, res) {
-    mavensController.create(req.body, function(err, maven) {
-      if (err) {
+    mavensController.create(req.body.username)
+      .then(function(maven) {
+        res.json(maven);
+      })
+      .fail(function(err) {
         res.json({ error: err.message });
-      }
-
-      res.json(maven);
-    });
+      })
+      .done();
   });
 
   //
   // Vote for a maven.
   //
-  app.post('/api/mavens/:id/vote', function(req, res) {
-    mavensController.vote(req.params.id, function(err, maven) {
-      if (err) {
+  app.post('/api/mavens/:username/love', function(req, res) {
+    mavensController.love(req.params.username)
+      .then(function(maven) {
+        res.json(maven);
+      })
+      .fail(function(err) {
         res.json({ error: err.message });
-      }
-
-      res.json(maven);
-    });
+      })
+      .done();
   });
 };
