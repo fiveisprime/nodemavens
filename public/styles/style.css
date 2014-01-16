@@ -672,11 +672,21 @@ input[type="submit"] {
   background-color: white;
   -webkit-box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
-  text-align: center;
 }
 
-.about {
-  margin-top: 60px;
+#about-modal {
+  position: fixed;
+  background-color: #fff;
+  width: 960px;
+  height: 250px;
+  top: 60px;
+  padding-top: 35px;
+  -webkit-box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+}
+
+.centered {
+  text-align: center;
 }
 
 .define p {
@@ -696,5 +706,17 @@ input[type="submit"] {
     text-align: center;
     padding-top: 15px;
     height: 320px;
+  }
+
+  #love-form form {
+    width: 100%;
+    top: 50px;
+    left: 0;
+  }
+
+  #about-modal {
+    width: 100%;
+    top: 50px;
+    left: 0;
   }
 }
