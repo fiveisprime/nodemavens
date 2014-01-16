@@ -41,16 +41,26 @@ function($, Backbone, _, Handlebars) {
   };
 
   var App = {};
+  App.data = {};
   App.Views = {};
   App.Models = {};
   App.Collections = {};
 
   App.Models.Maven = Backbone.Model.extend({
-    defaults: {}
+    url: '/api/mavens',
+    defaults: {
+      username: '',
+      name: '',
+      company: '',
+      location: '',
+      avatar_url: 'http://www.gravatar.com/avatar/?d=identicon',
+      rep: 0
+    }
   });
 
   App.Collections.Mavens = Backbone.Collection.extend({
-    model: App.Models.Maven
+    model: App.Models.Maven,
+    url: '/api/mavens'
   });
 
   App.Views.Love = Backbone.View.extend({
@@ -64,12 +74,31 @@ function($, Backbone, _, Handlebars) {
       this.$el.find('[name=username]').focus();
     },
     submit: function() {
-      this.$el.fadeOut(200, _.bind(function() {
-        this.$el.html('');
+      var user = this.$el.find('[name=username]').val();
+
+      if (!user) {
+        this.error('Hey, you have to enter a username!');
+        return false;
+      }
+
+      $.post('/api/mavens', { username: user }, _.bind(function(res) {
+        if (res.error) {
+          this.error(res.error);
+        } else {
+          this.reset();
+          this.$el.fadeOut(200, _.bind(function() {
+            this.$el.html('');
+          }, this));
+        }
       }, this));
 
-      // TODO: POST to submit.
       return false;
+    },
+    reset: function() {
+      App.data.indexView.mavenList.collection.fetch({ reset: true });
+    },
+    error: function(msg) {
+      this.$el.find('.error').hide().empty().text(msg).fadeIn(100);
     }
   });
 
@@ -88,6 +117,43 @@ function($, Backbone, _, Handlebars) {
     }
   });
 
+  App.Views.Maven = Backbone.View.extend({
+    tagName: 'div',
+    template: Handlebars.templates.maven,
+    events: {
+      'click .send-love': 'love'
+    },
+    render: function() {
+      this.$el.html(this.template(this.model.toJSON()));
+      this.$el.attr('class', 'card grid_6');
+      return this;
+    },
+    love: function() {
+      var url = '/api/mavens/' + this.model.get('username') + '/love';
+
+      $.post(url, _.bind(function() {
+        App.data.indexView.mavenList.collection.fetch({ reset: true });
+      }, this));
+
+      return false;
+    }
+  });
+
+  App.Views.Mavens = Backbone.View.extend({
+    el: '.cards',
+    initialize: function() {
+      this.collection.bind('change reset add remove', this.render, this);
+      this.collection.fetch();
+    },
+    render: function() {
+      this.$el.html('');
+      this.collection.each(function(maven) {
+        var mavenView = new App.Views.Maven({ model: maven });
+        this.$el.append(mavenView.render().el);
+      }, this);
+    }
+  });
+
   App.Views.Index = Backbone.View.extend({
     template: Handlebars.templates.index,
     el: document.body,
@@ -100,7 +166,10 @@ function($, Backbone, _, Handlebars) {
     },
     initializeChildren: function() {
       this.aboutForm = new App.Views.About();
-      this.loveForm = new App.Views.Love();
+      this.loveForm  = new App.Views.Love();
+      this.mavenList = new App.Views.Mavens({
+        collection: new App.Collections.Mavens()
+      });
     },
     render: function() {
       this.$el.html(this.template());
@@ -121,7 +190,7 @@ function($, Backbone, _, Handlebars) {
       '': 'index'
     },
     index: function() {
-      new App.Views.Index();
+      App.data.indexView = new App.Views.Index();
     }
   });
 

@@ -1,3 +1,9 @@
+//
+//     nodemavens
+//     Copyright(c) 2014 Matt Hernandez <matt@modulus.io>
+//     MIT Licensed
+//
+
 var mongoose = require('mongoose')
   , Q        = require('q');
 
@@ -9,11 +15,21 @@ var mavenSchema = mongoose.Schema({
 , avatar_url: String
 , github_url: String
 , blog_url: String
-, rep: Number
+, love: Number
 });
 
 var Maven = mongoose.model('Maven', mavenSchema);
 
+if (!mavenSchema.options.toObject) mavenSchema.options.toObject = {};
+mavenSchema.options.toObject.transform = function(doc, ret) {
+  delete ret._id;
+  delete ret.__v;
+};
+
+//
+// Exposed models.
+// ===============
+//
 module.exports = function() {
   var internals = {};
 
@@ -24,6 +40,43 @@ module.exports = function() {
 
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'mongoose error:'));
+
+  //
+  // Get by username of return all mavens.
+  //
+  internals.get = function(username) {
+    var deferred = Q.defer();
+
+    if (!username) {
+      Maven.find({}, null, { sort: { love: -1 }, limit: 20 }, function(err, docs) {
+        if (err) {
+          deferred.reject(err);
+        } else {
+          var result = [], i = 0;
+
+          for (; i < docs.length; i++) {
+            result.push(docs[i].toObject());
+          }
+
+          deferred.resolve(result);
+        }
+      });
+    } else {
+      Maven.findOne({ username: username }, function(err, doc) {
+        if (err) {
+          deferred.reject(err);
+        } else {
+          if (doc) {
+            deferred.resolve(doc.toObject());
+          } else {
+            deferred.resolve(null);
+          }
+        }
+      });
+    }
+
+    return deferred.promise;
+  };
 
   //
   // Create a maven document.
@@ -41,13 +94,13 @@ module.exports = function() {
       }
 
       if (doc) {
-        doc.rep++;
+        doc.love++;
         doc.save(function(err, maven) {
           if (err) {
             return deferred.reject(err);
           }
 
-          return deferred.resolve(maven);
+          return deferred.resolve(maven.toObject());
         });
       } else {
         var maven = new Maven({
@@ -55,10 +108,10 @@ module.exports = function() {
         , name: ghUser.name
         , company: ghUser.company
         , location: ghUser.location
-        , avatar_url: ghUser.avatar_url
+        , avatar_url: ghUser.avatar_url || 'http://www.gravatar.com/avatar/?d=identicon'
         , github_url: ghUser.html_url
         , blog_url: ghUser.blog
-        , rep: 1
+        , love: 1
         });
 
         maven.save(function(err, maven) {
@@ -66,8 +119,25 @@ module.exports = function() {
             return deferred.reject(err);
           }
 
-          deferred.resolve(maven);
+          deferred.resolve(maven.toObject());
         });
+      }
+    });
+
+    return deferred.promise;
+  };
+
+  //
+  // Add some love - increment love by 1.
+  //
+  internals.addLove = function(username) {
+    var deferred = Q.defer();
+
+    Maven.update({ username: username }, { $inc: { love: 1 } }, function(err) {
+      if (err) {
+        deferred.reject(err);
+      } else {
+        deferred.resolve(true);
       }
     });
 

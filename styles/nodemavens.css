@@ -126,17 +126,17 @@ input[type="submit"] {
   left: 40%;
   padding: 20px;
   background-color: white;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
 }
 
 #about-modal {
   position: fixed;
   background-color: #fff;
   width: 960px;
-  height: 250px;
   top: 60px;
   padding-top: 35px;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
+  padding-bottom: 20px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
 }
 
 .centered {
@@ -151,6 +151,43 @@ input[type="submit"] {
 .define h4 {
   margin-bottom: 10px;
   margin-top: 0;
+}
+
+.error {
+  color: #F66;
+  margin: -5px auto 10px auto;
+  text-align: center;
+}
+
+.cards {
+  margin-top: 40px;
+}
+
+.cards img {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+.card div.content {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.card div.content p {
+  margin: 2px 0 4px 0;
+}
+
+.card.grid_6:nth-child(odd) {
+  margin-left: 0;
+}
+
+.card.grid_6:nth-child(odd) {
+  margin-right: 0;
 }
 
 /* Mobile */
@@ -171,5 +208,14 @@ input[type="submit"] {
     width: 100%;
     top: 50px;
     left: 0;
+  }
+
+  .cards img {
+    display: block;
+  }
+
+  .card div.content {
+    display: block;
+    margin-left: 0;
   }
 }

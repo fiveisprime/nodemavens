@@ -17,8 +17,8 @@ app.set('title', 'Node Mavens');
 
 app.disable('x-powered-by');
 
-app.use(express.favicon('public/images/favicon.ico'));
-app.use(express.logger('dev'));
+app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));
+// app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(app.router);

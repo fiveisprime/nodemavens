@@ -1,6 +1,6 @@
 //
 //     nodemavens
-//     Copyright(c) 2013 Matt Hernandez <matt@modulus.io>
+//     Copyright(c) 2014 Matt Hernandez <matt@modulus.io>
 //     MIT Licensed
 //
 
@@ -38,6 +38,10 @@ var getGitHubUser = function(username) {
         return setTimeout(sendRequest, 300);
       }
 
+      if (response.statusCode === 404) {
+        return deferred.reject(new Error('GitHub user not found.'));
+      }
+
       if (response.statusCode !== 200) {
         console.log('GitHub request failed', opts, response.statusCode, body);
         return deferred.reject(new Error(body));
@@ -50,6 +54,10 @@ var getGitHubUser = function(username) {
   return deferred.promise;
 };
 
+//
+// Exposed controllers.
+// ====================
+//
 module.exports = function(models) {
   var internals = {};
 
@@ -79,6 +87,17 @@ module.exports = function(models) {
     var deferred = Q.defer();
 
     models.get(username)
+      .then(deferred.resolve)
+      .fail(deferred.reject)
+      .done();
+
+    return deferred.promise;
+  };
+
+  internals.love = function(username) {
+    var deferred = Q.defer();
+
+    models.addLove(username)
       .then(deferred.resolve)
       .fail(deferred.reject)
       .done();
