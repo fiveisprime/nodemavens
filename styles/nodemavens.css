@@ -122,9 +122,8 @@ input[type="submit"] {
 
 #love-form form {
   position: fixed;
-  width: 45%;
   top: 150px;
-  left: 25%;
+  left: 40%;
   padding: 20px;
   background-color: white;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.25);
