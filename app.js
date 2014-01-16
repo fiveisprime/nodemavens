@@ -28,6 +28,9 @@ if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
-require('./server/routes')(app, require('./server/controllers')());
+var models = require('./server/models')()
+  , controllers = require('./server/controllers')(models);
+
+require('./server/routes')(app, controllers);
 
 http.createServer(app).listen(app.get('port'));

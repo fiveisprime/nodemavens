@@ -15,8 +15,7 @@ var mavenSchema = mongoose.Schema({
 var Maven = mongoose.model('Maven', mavenSchema);
 
 module.exports = function() {
-  var internals = {}
-    , mavens = internals.mavens = {};
+  var internals = {};
 
   //
   // MongoDB connection.
@@ -29,7 +28,7 @@ module.exports = function() {
   //
   // Create a maven document.
   //
-  mavens.create = function(ghUser) {
+  internals.create = function(ghUser) {
     var deferred = Q.defer();
 
     if (!ghUser) {

@@ -4,8 +4,7 @@
 //     MIT Licensed
 //
 
-module.exports = function(app, controllers) {
-  var mavensController = controllers.mavens;
+module.exports = function(app, controller) {
 
   //
   // GET index.
@@ -23,7 +22,7 @@ module.exports = function(app, controllers) {
   // GET mavens.
   //
   app.get('/api/mavens/:username?', function(req, res) {
-    mavensController.get(req.params.username)
+    controller.get(req.params.username)
       .then(function(mavens) {
         res.json(mavens);
       })
@@ -37,7 +36,7 @@ module.exports = function(app, controllers) {
   // Create/POST a maven.
   //
   app.post('/api/mavens', function(req, res) {
-    mavensController.create(req.body.username)
+    controller.create(req.body.username)
       .then(function(maven) {
         res.json(maven);
       })
@@ -51,7 +50,7 @@ module.exports = function(app, controllers) {
   // Vote for a maven.
   //
   app.post('/api/mavens/:username/love', function(req, res) {
-    mavensController.love(req.params.username)
+    controller.love(req.params.username)
       .then(function(maven) {
         res.json(maven);
       })
