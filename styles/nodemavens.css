@@ -190,6 +190,39 @@ input[type="submit"] {
   margin-right: 0;
 }
 
+/* Spinner */
+
+#loadingProgressG {
+  width: 256px;
+  height: 20px;
+  margin-top: 50px;
+  overflow: hidden;
+  background-color: #e33b7e;
+  border-radius: 10px;
+}
+
+.loadingProgressG {
+  background-color: #3ee49c;
+  margin-top: 0;
+  margin-left: -256px;
+  animation-name: bounce_loadingProgressG;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  width: 256px;
+  height: 20px;
+}
+
+@keyframes bounce_loadingProgressG {
+  0% {
+    margin-left: -256px;
+  }
+
+  100%{
+    margin-left: 256px;
+  }
+}
+
 /* Mobile */
 @media screen and (max-width : 480px) {
   .hero {

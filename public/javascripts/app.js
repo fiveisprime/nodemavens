@@ -156,7 +156,7 @@ function($, Backbone, _, Handlebars) {
 
   App.Views.Index = Backbone.View.extend({
     template: Handlebars.templates.index,
-    el: document.body,
+    el: 'section#main',
     events: {
       'click #love': 'spreadLove',
       'click #about': 'showAbout'

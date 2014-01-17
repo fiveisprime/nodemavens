@@ -736,6 +736,53 @@ input[type="submit"] {
   margin-right: 0;
 }
 
+/* Spinner */
+
+#loadingProgressG {
+  width: 256px;
+  height: 20px;
+  margin-top: 50px;
+  overflow: hidden;
+  background-color: #e33b7e;
+  border-radius: 10px;
+}
+
+.loadingProgressG {
+  background-color: #3ee49c;
+  margin-top: 0;
+  margin-left: -256px;
+  -webkit-animation-name: bounce_loadingProgressG;
+  animation-name: bounce_loadingProgressG;
+  -webkit-animation-duration: 1.6s;
+  animation-duration: 1.6s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  width: 256px;
+  height: 20px;
+}
+
+@-webkit-keyframes bounce_loadingProgressG {
+  0% {
+    margin-left: -256px;
+  }
+
+  100% {
+    margin-left: 256px;
+  }
+}
+
+@keyframes bounce_loadingProgressG {
+  0% {
+    margin-left: -256px;
+  }
+
+  100% {
+    margin-left: 256px;
+  }
+}
+
 /* Mobile */
 
 @media screen and (max-width : 480px) {
