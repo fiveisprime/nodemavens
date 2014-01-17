@@ -192,7 +192,7 @@ input[type="submit"] {
 
 /* Spinner */
 
-#loadingProgressG {
+#progress-outer {
   width: 256px;
   height: 20px;
   margin-top: 50px;
@@ -201,11 +201,11 @@ input[type="submit"] {
   border-radius: 10px;
 }
 
-.loadingProgressG {
+.progress-bar {
   background-color: #3ee49c;
   margin-top: 0;
   margin-left: -256px;
-  animation-name: bounce_loadingProgressG;
+  animation-name: fill;
   animation-duration: 1.6s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -213,7 +213,7 @@ input[type="submit"] {
   height: 20px;
 }
 
-@keyframes bounce_loadingProgressG {
+@keyframes fill {
   0% {
     margin-left: -256px;
   }

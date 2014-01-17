@@ -157,11 +157,10 @@ function($, Backbone, _, Handlebars) {
   App.Views.Index = Backbone.View.extend({
     template: Handlebars.templates.index,
     el: 'section#main',
-    events: {
-      'click #love': 'spreadLove',
-      'click #about': 'showAbout'
-    },
     initialize: function() {
+      $('#love').on('click', _.bind(this.spreadLove, this));
+      $('#about').on('click', _.bind(this.showAbout, this));
+
       this.render();
     },
     initializeChildren: function() {
