@@ -709,7 +709,7 @@ input[type="submit"] {
 }
 
 .error {
-  color: #F66;
+  color: #E33B7E;
   margin: -5px auto 10px auto;
   text-align: center;
 }
