@@ -166,14 +166,29 @@ input[type="submit"] {
   margin-top: 40px;
 }
 
-.cards img {
+.image-wrapper {
   display: inline-block;
+  width: 90px;
+  height: 90px;
+  background-color: rgba(62, 228, 156, .5);
+}
+
+.cards img {
   width: 80px;
   height: 80px;
+  margin: 5px;
 }
 
 .card {
   margin-bottom: 15px;
+}
+
+p.company {
+  height: 20px;
+  max-width: 380px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .card div.content {

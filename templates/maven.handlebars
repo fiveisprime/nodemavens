@@ -1,9 +1,11 @@
-<img src="{{avatar_url}}" alt="{{username}}">
+<div class="image-wrapper">
+  <img src="{{avatar_url}}" alt="{{username}}">
+</div>
 <div class="content">
-  <p>{{name}} ({{username}})</p>
-  <p>{{company}}</p>
+  <p>{{name}} (<a href="{{github_url}}">{{username}}</a>)</p>
+  <p class="company">{{company}}</p>
   <p>{{location}}</p>
   <div class="loves">
-    <a href="#" class="send-love">{{love}} ❤'s</a>
+    <a href="#" class="send-love" title="Give {{username}} some more love!">{{love}} ❤'s</a>
   </div>
 </div>
