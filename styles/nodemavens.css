@@ -2,14 +2,15 @@
 
 :root {
   var-primary:     #F5F5F5;
-  var-link:        #e33b7e;
+  var-link:        #E33B7E;
 
-  var-accent:      #e33b7e;
-  var-accent-dark: #d43876;
+  var-btn:         #403F3F;
 
-  var-btn-main:    #3ee49c;
-  var-btn-dark:    #40d896;
-  var-btn:         #403f3f;
+  var-accent:      #E33B7E;
+  var-accent-dark: #FF4290;
+
+  var-btn-main:    #3EE49C;
+  var-btn-dark:    #41FFAE;
 }
 
 /* Full width */
@@ -59,6 +60,8 @@ a.btn:visited {
 
 input[type="submit"] {
   margin-bottom: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 input[type="text"] {
@@ -93,6 +96,7 @@ input[type="submit"] {
 
 .btn.accent {
   background-color: var(accent);
+  min-width: 80px;
 }
 
 .btn.accent:hover {
@@ -112,15 +116,18 @@ input[type="submit"] {
 
 .hero p {
   letter-spacing: 1px;
+  text-shadow: 1px 1px 5px #000;
 }
 
 .hero h1 {
   margin-bottom: 10px;
+  text-shadow: 1px 1px 5px #000;
 }
 
 .hero h2 {
   margin-top: 5px;
   color: #a36de0;
+  text-shadow: 1px 1px 5px #000;
 }
 
 #love-form {
@@ -164,12 +171,15 @@ input[type="submit"] {
 
 .cards {
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .image-wrapper {
   display: inline-block;
   width: 90px;
   height: 90px;
+  margin-top: 5px;
+  margin-left: 5px;
   background-color: rgba(62, 228, 156, .5);
 }
 
@@ -180,12 +190,15 @@ input[type="submit"] {
 }
 
 .card {
+  box-sizing: border-box;
+  padding: 5px;
+  box-shadow: 0 0 5px #ddd;
   margin-bottom: 15px;
 }
 
 p.company {
   height: 20px;
-  max-width: 380px;
+  max-width: 365px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -204,7 +217,7 @@ p.company {
   margin-left: 0;
 }
 
-.card.grid_6:nth-child(odd) {
+.card.grid_6:nth-child(even) {
   margin-right: 0;
 }
 
@@ -259,6 +272,11 @@ p.company {
     width: 100%;
     top: 50px;
     left: 0;
+  }
+  
+  .cards {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   .cards img {

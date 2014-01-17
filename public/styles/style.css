@@ -557,12 +557,12 @@ table {
 /* Full width */
 
 a {
-  color: #e33b7e;
+  color: #E33B7E;
   text-decoration: none;
 }
 
 a:visited {
-  color: #e33b7e;
+  color: #E33B7E;
   text-decoration: none;
 }
 
@@ -584,12 +584,12 @@ em {
   margin-bottom: 20px;
   line-height: normal;
   padding: 8px 10px;
-  background-color: #3ee49c;
-  color: #403f3f;
+  background-color: #3EE49C;
+  color: #403F3F;
 }
 
 .btn:hover {
-  background-color: #40d896;
+  background-color: #41FFAE;
 }
 
 a.btn:hover {
@@ -597,11 +597,13 @@ a.btn:hover {
 }
 
 a.btn:visited {
-  color: #403f3f;
+  color: #403F3F;
 }
 
 input[type="submit"] {
   margin-bottom: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 input[type="text"] {
@@ -636,11 +638,12 @@ input[type="submit"] {
 }
 
 .btn.accent {
-  background-color: #e33b7e;
+  background-color: #E33B7E;
+  min-width: 80px;
 }
 
 .btn.accent:hover {
-  background-color: #d43876;
+  background-color: #FF4290;
 }
 
 .strike {
@@ -656,15 +659,18 @@ input[type="submit"] {
 
 .hero p {
   letter-spacing: 1px;
+  text-shadow: 1px 1px 5px #000;
 }
 
 .hero h1 {
   margin-bottom: 10px;
+  text-shadow: 1px 1px 5px #000;
 }
 
 .hero h2 {
   margin-top: 5px;
   color: #a36de0;
+  text-shadow: 1px 1px 5px #000;
 }
 
 #love-form {
@@ -710,12 +716,15 @@ input[type="submit"] {
 
 .cards {
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .image-wrapper {
   display: inline-block;
   width: 90px;
   height: 90px;
+  margin-top: 5px;
+  margin-left: 5px;
   background-color: rgba(62, 228, 156, .5);
 }
 
@@ -726,12 +735,18 @@ input[type="submit"] {
 }
 
 .card {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px;
+  -webkit-box-shadow: 0 0 5px #ddd;
+  box-shadow: 0 0 5px #ddd;
   margin-bottom: 15px;
 }
 
 p.company {
   height: 20px;
-  max-width: 380px;
+  max-width: 365px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -750,7 +765,7 @@ p.company {
   margin-left: 0;
 }
 
-.card.grid_6:nth-child(odd) {
+.card.grid_6:nth-child(even) {
   margin-right: 0;
 }
 
@@ -820,6 +835,11 @@ p.company {
     width: 100%;
     top: 50px;
     left: 0;
+  }
+
+  .cards {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   .cards img {

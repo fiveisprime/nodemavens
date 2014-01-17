@@ -7,19 +7,19 @@ SRC = public/javascripts/app.js app.js $(wildcard public/lib/*.js) \
 TEMPLATES = $(wildcard templates/*.handlebars)
 
 all: lint build min
+	@echo ---- Build Succeeded ----
 
 lint: $(SRC)
-	@node_modules/.bin/jshint $^
+	@node_modules/.bin/jshint \
+	--reporter node_modules/jshint-stylish/stylish.js \
+	$^
 
 build:
-	@echo Compiling templates...
 	@node_modules/.bin/handlebars $(TEMPLATES) \
 	--output public/javascripts/templates.js \
 	--min
-	@echo Compiling styles...
 	@cat $(STYLESRC) > public/styles/style.tmp.css && \
 	node_modules/.bin/myth public/styles/style.tmp.css public/styles/style.css
-	@echo Cleaning up...
 	@rm public/styles/style.tmp.css
 
 min:

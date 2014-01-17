@@ -74,7 +74,7 @@ function($, Backbone, _, Collections) {
 
   var Maven = Backbone.View.extend({
     tagName: 'div',
-    template: Handlebars.templates.maven,
+    template: Handlebars.templates.card,
     events: {
       'click .send-love': 'love'
     },
