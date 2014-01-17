@@ -7,6 +7,8 @@ define([
 ],
 function($, Backbone, _, Collections) {
 
+  'use strict';
+
   var Love = Backbone.View.extend({
     template: Handlebars.templates.love,
     el: '#love-form',

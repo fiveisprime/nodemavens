@@ -1,5 +1,7 @@
 define(['backbone'], function(Backbone) {
 
+  'use strict';
+
   var Maven = Backbone.Model.extend({
     url: '/api/mavens',
     defaults: {

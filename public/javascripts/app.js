@@ -29,6 +29,7 @@ require([
   'lib/router'
 ],
 function($, Backbone, Router) {
+
   'use strict';
 
   $.fn.center = function () {
@@ -41,4 +42,5 @@ function($, Backbone, Router) {
 
   new Router();
   Backbone.history.start();
+
 });
