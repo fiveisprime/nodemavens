@@ -67,7 +67,8 @@ function($, Backbone, _, Handlebars) {
     template: Handlebars.templates.love,
     el: '#love-form',
     events: {
-      'click [type=submit]': 'submit'
+      'click [type=submit]': 'submit',
+      'click .close': 'hide'
     },
     render: function() {
       this.$el.html(this.template()).center().fadeIn(150);
@@ -86,10 +87,15 @@ function($, Backbone, _, Handlebars) {
           this.error(res.error);
         } else {
           this.reset();
-          this.$el.fadeOut(200, _.bind(function() {
-            this.$el.html('');
-          }, this));
+          this.hide();
         }
+      }, this));
+
+      return false;
+    },
+    hide: function() {
+      this.$el.fadeOut(200, _.bind(function() {
+        this.$el.html('');
       }, this));
 
       return false;

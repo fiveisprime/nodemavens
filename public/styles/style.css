@@ -600,6 +600,10 @@ a.btn:visited {
   color: #403f3f;
 }
 
+input[type="submit"] {
+  margin-bottom: 0;
+}
+
 input[type="text"] {
   border: 1px solid #ccc;
   padding: 6px 4px;
@@ -610,7 +614,6 @@ input[type="text"] {
   width: 210px;
   max-width: 100%;
   display: inline-block;
-  margin-bottom: 20px;
   background-color: #fff;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
