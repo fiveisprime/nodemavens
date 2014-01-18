@@ -130,6 +130,10 @@ input[type="submit"] {
   text-shadow: 1px 1px 5px #000;
 }
 
+.tweet {
+  margin-top: 5px;
+}
+
 #love-form {
   position: fixed;
   top: 150px;
@@ -206,6 +210,7 @@ p.company {
 
 .card div.content {
   display: inline-block;
+  width: 100%;
   margin-left: 10px;
 }
 
@@ -286,5 +291,9 @@ p.company {
   .card div.content {
     display: block;
     margin-left: 0;
+  }
+  
+  .tweet {
+    display: none;
   }
 }
