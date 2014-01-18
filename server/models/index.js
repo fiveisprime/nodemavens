@@ -88,7 +88,7 @@ module.exports = function() {
       return deferred.reject(new Error('GitHub user not found.'));
     }
 
-    Maven.findOne({ username: ghUser.login.toLowerCase() }, function(err, doc) {
+    Maven.findOne({ username: ghUser.login }, function(err, doc) {
       if (err) {
         return deferred.reject(err);
       }
