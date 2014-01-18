@@ -312,11 +312,11 @@ div.links a:visited {
     margin-left: 0;
     width: 100%;
   }
-  
+
   .tweet {
     display: none;
   }
-  
+
   div.links {
     position: relative;
     display: block;
@@ -328,5 +328,5 @@ div.links a:visited {
     display: inline-block;
     margin-bottom: 0;
   }
-  
+
 }
