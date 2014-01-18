@@ -141,6 +141,7 @@ input[type="submit"] {
   padding: 20px;
   background-color: white;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 #about-modal {
@@ -151,6 +152,7 @@ input[type="submit"] {
   padding-top: 35px;
   padding-bottom: 20px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 .centered {
@@ -210,12 +212,29 @@ p.company {
 
 .card div.content {
   display: inline-block;
-  width: 70%;
+  width: 65%;
   margin-left: 10px;
 }
 
 .card div.content p {
   margin: 2px 0 4px 0;
+}
+
+div.links {
+  position: relative;
+  display: inline-block;
+  float: right;
+  padding-top: 10px;
+}
+
+div.links a {
+  display: block;
+  margin-bottom: 8px;
+  color: #414141;
+}
+
+div.links a:visited {
+  color: #414141;
 }
 
 .card.grid_6:nth-child(odd) {
@@ -297,4 +316,17 @@ p.company {
   .tweet {
     display: none;
   }
+  
+  div.links {
+    position: relative;
+    display: block;
+    float: right;
+    top: -190px;
+  }
+
+  div.links a {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  
 }

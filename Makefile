@@ -1,4 +1,5 @@
-STYLESRC = styles/normalize.css styles/grid.css styles/nodemavens.css
+STYLESRC = styles/normalize.css styles/grid.css styles/font-awesome.css \
+	styles/nodemavens.css
 
 SRC = public/javascripts/app.js app.js $(wildcard public/lib/*.js) \
 	$(wildcard server/routes/*.js) $(wildcard server/controllers/*.js) \
