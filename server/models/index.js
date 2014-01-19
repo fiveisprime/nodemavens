@@ -48,7 +48,7 @@ module.exports = function() {
     var deferred = Q.defer();
 
     if (!username) {
-      Maven.find({}, null, { sort: { love: -1 }, limit: 20 }, function(err, docs) {
+      Maven.find({}, null, { sort: { love: -1 }, limit: 40 }, function(err, docs) {
         if (err) {
           deferred.reject(err);
         } else {
@@ -103,18 +103,17 @@ module.exports = function() {
           return deferred.resolve(maven.toObject());
         });
       } else {
-        var maven = new Maven({
+        Maven.create({
           username: ghUser.login
         , name: ghUser.name
         , company: ghUser.company
         , location: ghUser.location
-        , avatar_url: ghUser.avatar_url || 'http://www.gravatar.com/avatar/?d=identicon'
+        , avatar_url: ghUser.avatar_url
         , github_url: ghUser.html_url
         , blog_url: ghUser.blog
         , love: 1
-        });
-
-        maven.save(function(err, maven) {
+        },
+        function(err, maven) {
           if (err) {
             return deferred.reject(err);
           }
