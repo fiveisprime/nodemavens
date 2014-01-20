@@ -25,7 +25,8 @@
     "ejs": "~0.8.5",
     "request": "~2.31.0",
     "q": "~1.0.0",
-    "mongoose": "~3.8.4"
+    "mongoose": "~3.8.4",
+    "connect-mongo": "~0.4.0"
   },
   "devDependencies": {
     "clean-css": "~2.0.6",

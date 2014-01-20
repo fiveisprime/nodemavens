@@ -36,6 +36,16 @@ module.exports = function(app, controller) {
   // Create/POST a maven.
   //
   app.post('/api/mavens', function(req, res) {
+    if (req.session.count) {
+      if (req.session.count === 5) {
+        return res.json({ error: 'Whoa! That\'s a little too much love.. you are making people uncomfortable.' });
+      } else {
+        req.session.count++;
+      }
+    } else {
+      req.session.count = 1;
+    }
+
     controller.create(req.body.username)
       .then(function(maven) {
         res.json(maven);
@@ -50,6 +60,16 @@ module.exports = function(app, controller) {
   // Vote for a maven.
   //
   app.post('/api/mavens/:username/love', function(req, res) {
+    if (req.session.count) {
+      if (req.session.count === 5) {
+        return res.json({ error: 'Whoa! That\'s a little too much love.. you are making people uncomfortable.' });
+      } else {
+        req.session.count++;
+      }
+    } else {
+      req.session.count = 1;
+    }
+
     controller.love(req.params.username)
       .then(function(maven) {
         res.json(maven);

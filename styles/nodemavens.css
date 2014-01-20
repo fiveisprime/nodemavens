@@ -134,10 +134,13 @@ input[type="submit"] {
   margin-top: 5px;
 }
 
-#love-form {
+#love-form,
+#error-modal {
   position: fixed;
   top: 150px;
   left: 40%;
+  width: 330px;
+  text-align: center;
   padding: 20px;
   background-color: white;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);

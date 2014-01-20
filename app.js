@@ -4,11 +4,21 @@
 //     MIT Licensed
 //
 
-var express = require('express')
-  , http    = require('http')
-  , path    = require('path');
+var express    = require('express')
+  , MongoStore = require('connect-mongo')(express)
+  , http       = require('http')
+  , path       = require('path');
 
 var app = express();
+
+app.use(express.cookieParser(process.env.SECRET || 'cats'));
+app.use(express.session({
+  secret: process.env.SECRET || 'cats'
+, cookie: { maxAge: 24 * 60 * 60 * 1000 }
+, store: new MongoStore({
+    url: process.env.MONGO_URL || 'mongodb://localhost/test'
+  })
+}));
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'server/views'));

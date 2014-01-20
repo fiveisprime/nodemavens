@@ -89,8 +89,13 @@ function($, Backbone, _, Collections) {
     love: function() {
       var url = '/api/mavens/' + this.model.get('username') + '/love';
 
-      $.post(url, _.bind(function() {
-        this.mavenCollection.fetch({ reset: true });
+      $.post(url, _.bind(function(res) {
+        if (res.error) {
+          // TODO: show le error.
+          console.log(res.error);
+        } else {
+          this.mavenCollection.fetch({ reset: true });
+        }
       }, this));
 
       return false;
