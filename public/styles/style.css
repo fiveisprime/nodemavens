@@ -1082,8 +1082,10 @@ div.links a:visited {
     height: 320px;
   }
 
-  #love-form {
+  #love-form,
+  #error-modal {
     width: 100%;
+    padding: 20px 0;
     top: 50px;
     left: 0;
   }

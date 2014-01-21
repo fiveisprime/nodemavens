@@ -51,6 +51,7 @@
   "browser"       : true,
 
   "globals"       : {
+    "define"      : false,
     "afterEach"   : false,
     "beforeEach"  : false,
     "describe"    : false,

@@ -13,7 +13,12 @@ module.exports = function(app, controller) {
   //
   app.all('/*', function(req, res, next) {
     if ('POST' === req.method) {
-      if (blacklist.indexOf(req.connection.remoteAddress) > -1) {
+      console.log(req.connection.remoteAddress);
+      console.log(req.headers['user-agent']);
+
+      var ua = req.headers['user-agent'];
+
+      if (blacklist.indexOf(req.connection.remoteAddress) > -1 || !ua || ua.indexOf('curl') > -1) {
         res.statusCode = 403;
         return res.json();
       }

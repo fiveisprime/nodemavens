@@ -1,3 +1,5 @@
+/* global Handlebars */
+
 define([
   'jquery',
   'backbone',
@@ -9,9 +11,34 @@ function($, Backbone, _, Collections) {
 
   'use strict';
 
+  //
+  // Global collections.
+  //
   var mavenCollection = new Collections.Mavens();
   var recentCollection = new Collections.RecentMavens();
 
+  //
+  // Error dialog view.
+  //
+  var Error = Backbone.View.extend({
+    template: Handlebars.templates.error,
+    el: '#error-modal',
+    events: {
+      'click .ack': 'close'
+    },
+    show: function(message) {
+      this.$el.html(this.template({ message: message }));
+      this.$el.center().fadeIn(100);
+    },
+    close: function() {
+      this.$el.fadeOut(200);
+      return false;
+    }
+  });
+
+  //
+  // The love dialog for adding new mavens.
+  //
   var Love = Backbone.View.extend({
     template: Handlebars.templates.love,
     el: '#love-form',
@@ -58,6 +85,9 @@ function($, Backbone, _, Collections) {
     }
   });
 
+  //
+  // The about dialog view.
+  //
   var About = Backbone.View.extend({
     template: Handlebars.templates.about,
     el: '#about-modal',
@@ -73,11 +103,18 @@ function($, Backbone, _, Collections) {
     }
   });
 
+  //
+  // Maven view for rendering cards and adding hearts. There will be one of
+  //    these for each maven rendered (including recent and top).
+  //
   var Maven = Backbone.View.extend({
     tagName: 'div',
     template: Handlebars.templates.card,
     events: {
       'click .send-love': 'love'
+    },
+    initialize: function() {
+      this.errorView = new Error();
     },
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
@@ -89,8 +126,7 @@ function($, Backbone, _, Collections) {
 
       $.post(url, _.bind(function(res) {
         if (res.error) {
-          // TODO: show le error.
-          console.log(res.error);
+          this.errorView.show(res.error);
         } else {
           recentCollection.fetch({ reset: true });
           mavenCollection.fetch({ reset: true });
@@ -101,9 +137,13 @@ function($, Backbone, _, Collections) {
     }
   });
 
+  //
+  // The root mavens view. The parent view that fetches and renders all maven
+  //    child views.
+  //
   var Mavens = Backbone.View.extend({
     el: '.cards',
-    initialize: function(options) {
+    initialize: function() {
       this.$recents = this.$el.find('.recent');
       this.$top = this.$el.find('.top');
 
@@ -132,6 +172,9 @@ function($, Backbone, _, Collections) {
     }
   });
 
+  //
+  // Index view which handles the about and love dialogs.
+  //
   var Index = Backbone.View.extend({
     template: Handlebars.templates.index,
     el: 'section#main',
@@ -160,8 +203,11 @@ function($, Backbone, _, Collections) {
     }
   });
 
+  //
+  // Expose the primary (index) view.
+  //
   return {
     Index: Index
-  }
+  };
 
 });

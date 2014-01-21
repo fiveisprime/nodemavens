@@ -1,7 +1,7 @@
 STYLESRC = styles/normalize.css styles/grid.css styles/font-awesome.css \
 	styles/nodemavens.css
 
-SRC = public/javascripts/app.js app.js $(wildcard public/lib/*.js) \
+SRC = public/javascripts/app.js app.js $(wildcard public/javascripts/lib/*.js) \
 	$(wildcard server/routes/*.js) $(wildcard server/controllers/*.js) \
 	$(wildcard models/*.js)
 
