@@ -9,15 +9,15 @@ function($, Backbone, _, Collections) {
 
   'use strict';
 
+  var mavenCollection = new Collections.Mavens();
+  var recentCollection = new Collections.RecentMavens();
+
   var Love = Backbone.View.extend({
     template: Handlebars.templates.love,
     el: '#love-form',
     events: {
       'click [type=submit]': 'submit',
       'click .close': 'hide'
-    },
-    initialize: function(options) {
-      this.mavenCollection = options.mavenCollection;
     },
     render: function() {
       this.$el.html(this.template()).center().fadeIn(150);
@@ -50,7 +50,8 @@ function($, Backbone, _, Collections) {
       return false;
     },
     reset: function() {
-      this.mavenCollection.fetch({ reset: true });
+      mavenCollection.fetch({ reset: true });
+      recentCollection.fetch({ reset: true });
     },
     error: function(msg) {
       this.$el.find('.error').hide().empty().text(msg).fadeIn(100);
@@ -78,9 +79,6 @@ function($, Backbone, _, Collections) {
     events: {
       'click .send-love': 'love'
     },
-    initialize: function(options) {
-      this.mavenCollection = options.mavenCollection;
-    },
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.attr('class', 'card grid_6');
@@ -94,7 +92,8 @@ function($, Backbone, _, Collections) {
           // TODO: show le error.
           console.log(res.error);
         } else {
-          this.mavenCollection.fetch({ reset: true });
+          recentCollection.fetch({ reset: true });
+          mavenCollection.fetch({ reset: true });
         }
       }, this));
 
@@ -105,17 +104,30 @@ function($, Backbone, _, Collections) {
   var Mavens = Backbone.View.extend({
     el: '.cards',
     initialize: function(options) {
-      this.collection.bind('change reset add remove', this.render, this);
-      this.collection.fetch();
+      this.$recents = this.$el.find('.recent');
+      this.$top = this.$el.find('.top');
+
+      mavenCollection.bind('change reset add', this.render, this);
+      recentCollection.bind('change reset add', this.render, this);
+
+      mavenCollection.fetch();
+      recentCollection.fetch();
     },
     render: function() {
-      this.$el.html('');
-      this.collection.each(function(maven) {
+      this.$recents.html('');
+      this.$top.html('');
+
+      recentCollection.each(function(maven) {
         var mavenView = new Maven({
-          model: maven,
-          mavenCollection: this.collection
+          model: maven
         });
-        this.$el.append(mavenView.render().el);
+        this.$recents.append(mavenView.render().el);
+      }, this);
+      mavenCollection.each(function(maven) {
+        var mavenView = new Maven({
+          model: maven
+        });
+        this.$top.append(mavenView.render().el);
       }, this);
     }
   });
@@ -130,15 +142,9 @@ function($, Backbone, _, Collections) {
       this.render();
     },
     initializeChildren: function() {
-      var mavenCollection = new Collections.Mavens();
-
       this.aboutForm = new About();
-      this.loveForm  = new Love({
-        mavenCollection: mavenCollection
-      });
-      this.mavenList = new Mavens({
-        collection: mavenCollection
-      });
+      this.loveForm  = new Love();
+      this.mavenList = new Mavens();
     },
     render: function() {
       this.$el.html(this.template());

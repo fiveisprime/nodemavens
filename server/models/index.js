@@ -15,6 +15,7 @@ var mavenSchema = mongoose.Schema({
 , avatar_url: String
 , github_url: String
 , blog_url: String
+, date: { type: Date, default: new Date(), index: true }
 , love: Number
 });
 
@@ -42,13 +43,36 @@ module.exports = function() {
   db.on('error', console.error.bind(console, 'mongoose error:'));
 
   //
+  // Get the most recent additions.
+  //
+  internals.getRecent = function() {
+    var deferred = Q.defer();
+
+    Maven.find({}, null, { sort: { date: -1 }, limit: 6 }, function(err, docs) {
+      if (err) {
+        deferred.reject(err);
+      } else {
+        var result = [], i = 0;
+
+        for (; i < docs.length; i++) {
+          result.push(docs[i].toObject());
+        }
+
+        deferred.resolve(result);
+      }
+    });
+
+    return deferred.promise;
+  };
+
+  //
   // Get by username of return all mavens.
   //
   internals.get = function(username) {
     var deferred = Q.defer();
 
     if (!username) {
-      Maven.find({}, null, { sort: { love: -1 }, limit: 40 }, function(err, docs) {
+      Maven.find({}, null, { sort: { love: -1 }, limit: 30 }, function(err, docs) {
         if (err) {
           deferred.reject(err);
         } else {

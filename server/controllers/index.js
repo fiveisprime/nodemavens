@@ -81,6 +81,20 @@ module.exports = function(models) {
   };
 
   //
+  // Get most resent mavens.
+  //
+  internals.getRecent = function() {
+    var deferred = Q.defer();
+
+    models.getRecent()
+      .then(deferred.resolve)
+      .fail(deferred.reject)
+      .done();
+
+    return deferred.promise;
+  };
+
+  //
   // Get a maven.
   //
   internals.get = function(username) {

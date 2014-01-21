@@ -4,7 +4,33 @@
 //     MIT Licensed
 //
 
+var blacklist = JSON.parse(process.env.BLICKLIST || '[]');
+
 module.exports = function(app, controller) {
+
+  //
+  // Disallow blacklisted IPs and verify the session count.
+  //
+  app.all('/*', function(req, res, next) {
+    if ('POST' === req.method) {
+      if (blacklist.indexOf(req.connection.remoteAddress) > -1) {
+        res.statusCode = 403;
+        return res.json();
+      }
+
+      if (req.session.count) {
+        if (req.session.count === 5) {
+          return res.json({ error: 'Whoa! That\'s a little too much love... you are making people uncomfortable...' });
+        } else {
+          req.session.count++;
+        }
+      } else {
+        req.session.count = 1;
+      }
+    }
+
+    next();
+  });
 
   //
   // GET index.
@@ -17,6 +43,20 @@ module.exports = function(app, controller) {
   // API routes.
   // ===========
   //
+
+  //
+  // GET the most recent mavens.
+  //
+  app.get('/api/mavens/recent', function(req, res) {
+    controller.getRecent()
+      .then(function(mavens) {
+        res.json(mavens);
+      })
+      .fail(function(err) {
+        res.json({ error: err.message });
+      })
+      .done();
+  });
 
   //
   // GET mavens.
@@ -36,16 +76,6 @@ module.exports = function(app, controller) {
   // Create/POST a maven.
   //
   app.post('/api/mavens', function(req, res) {
-    if (req.session.count) {
-      if (req.session.count === 5) {
-        return res.json({ error: 'Whoa! That\'s a little too much love.. you are making people uncomfortable.' });
-      } else {
-        req.session.count++;
-      }
-    } else {
-      req.session.count = 1;
-    }
-
     controller.create(req.body.username)
       .then(function(maven) {
         res.json(maven);
@@ -60,16 +90,6 @@ module.exports = function(app, controller) {
   // Vote for a maven.
   //
   app.post('/api/mavens/:username/love', function(req, res) {
-    if (req.session.count) {
-      if (req.session.count === 5) {
-        return res.json({ error: 'Whoa! That\'s a little too much love.. you are making people uncomfortable.' });
-      } else {
-        req.session.count++;
-      }
-    } else {
-      req.session.count = 1;
-    }
-
     controller.love(req.params.username)
       .then(function(maven) {
         res.json(maven);
