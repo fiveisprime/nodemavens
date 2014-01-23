@@ -4,7 +4,7 @@
 //     MIT Licensed
 //
 
-var blacklist = JSON.parse(process.env.BLICKLIST || '[]');
+var blacklist = ['107.21.216.112'];
 
 module.exports = function(app, controller) {
 
@@ -13,8 +13,6 @@ module.exports = function(app, controller) {
   //
   app.all('/*', function(req, res, next) {
     if ('POST' === req.method) {
-      console.log(req.connection.remoteAddress);
-      console.log(req.headers['user-agent']);
 
       var ua = req.headers['user-agent'];
 
@@ -25,7 +23,9 @@ module.exports = function(app, controller) {
 
       if (req.session.count) {
         if (req.session.count === 5) {
-          return res.json({ error: 'Whoa! That\'s a little too much love... you are making people uncomfortable...' });
+          return res.json({
+            error: 'Whoa! That\'s a little too much love... you\'re making people uncomfortable...'
+          });
         } else {
           req.session.count++;
         }
