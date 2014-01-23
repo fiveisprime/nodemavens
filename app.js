@@ -13,7 +13,7 @@ var app = express();
 
 app.use(express.cookieParser(process.env.SECRET || 'cats'));
 
-if ('production' === app.get('env')) {
+app.configure('production', function() {
   app.use(express.session({
     secret: process.env.SECRET || 'cats'
   , cookie: { maxAge: 24 * 60 * 60 * 1000 }
@@ -21,12 +21,12 @@ if ('production' === app.get('env')) {
       url: process.env.MONGO_URL || 'mongodb://localhost/test'
     })
   }));
-}
+});
 
-if ('development' === app.get('env')) {
+app.configure('development', function() {
   app.use(express.errorHandler());
   app.use(express.session());
-}
+});
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'server/views'));
