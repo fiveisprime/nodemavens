@@ -4,8 +4,6 @@
 //     MIT Licensed
 //
 
-var blacklist = ['107.21.216.112'];
-
 module.exports = function(app, controller) {
 
   //
@@ -16,7 +14,7 @@ module.exports = function(app, controller) {
 
       var ua = req.headers['user-agent'];
 
-      if (blacklist.indexOf(req.connection.remoteAddress) > -1 || !ua || ua.indexOf('curl') > -1) {
+      if (!ua || ua.indexOf('curl') > -1) {
         res.statusCode = 403;
         return res.json();
       }
