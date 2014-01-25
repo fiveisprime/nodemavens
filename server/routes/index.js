@@ -4,6 +4,8 @@
 //     MIT Licensed
 //
 
+var blacklist = JSON.parse(process.env.BLACKLIST || '[]');
+
 module.exports = function(app, controller) {
 
   //
@@ -12,9 +14,12 @@ module.exports = function(app, controller) {
   app.all('/*', function(req, res, next) {
     if ('POST' === req.method) {
 
-      var ua = req.headers['user-agent'];
+      var ip = req.headers['x-forwarded-for'].split(',')[0]
+        , ua = req.headers['user-agent'];
 
-      if (!ua || ua.indexOf('curl') > -1) {
+      console.log(new Date().toString(), ip);
+
+      if (blacklist.indexOf(ip) >= 0 || !ua || ua.indexOf('curl') >= 0) {
         res.statusCode = 403;
         return res.json();
       }
