@@ -44,7 +44,7 @@ module.exports = function(app, controller) {
   // GET index.
   //
   app.get('/', function(req, res) {
-    res.render('index');
+    res.sendfile('./server/views/index.html');
   });
 
   //
