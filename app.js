@@ -30,7 +30,6 @@ app.configure('development', function() {
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'server/views'));
-app.set('view engine', 'ejs');
 
 app.disable('x-powered-by');
 
