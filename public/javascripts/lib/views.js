@@ -128,7 +128,6 @@ function($, Backbone, _, Collections) {
         if (res.error) {
           this.errorView.show(res.error);
         } else {
-          recentCollection.fetch({ reset: true });
           mavenCollection.fetch({ reset: true });
         }
       }, this));
