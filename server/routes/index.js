@@ -14,6 +14,10 @@ module.exports = function(app, controller) {
   app.all('/*', function(req, res, next) {
     if ('POST' === req.method) {
 
+      if (!req.headers['x-forwarded-for']) {
+        return next();
+      }
+
       var ip = req.headers['x-forwarded-for'].split(',')[0]
         , ua = req.headers['user-agent'];
 
