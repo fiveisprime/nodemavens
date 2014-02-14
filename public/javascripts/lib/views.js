@@ -86,24 +86,6 @@ function($, Backbone, _, Collections) {
   });
 
   //
-  // The about dialog view.
-  //
-  var About = Backbone.View.extend({
-    template: Handlebars.templates.about,
-    el: '#about-modal',
-    events: {
-      'click': 'hide'
-    },
-    render: function() {
-      this.$el.html(this.template());
-      this.$el.center().fadeIn(100);
-    },
-    hide: function() {
-      this.$el.fadeOut(200);
-    }
-  });
-
-  //
   // Maven view for rendering cards and adding hearts. There will be one of
   //    these for each maven rendered (including recent and top).
   //
@@ -179,22 +161,16 @@ function($, Backbone, _, Collections) {
     el: 'section#main',
     initialize: function() {
       $('#love').on('click', _.bind(this.spreadLove, this));
-      $('#about').on('click', _.bind(this.showAbout, this));
 
       this.render();
     },
     initializeChildren: function() {
-      this.aboutForm = new About();
       this.loveForm  = new Love();
       this.mavenList = new Mavens();
     },
     render: function() {
       this.$el.html(this.template());
       _.defer(_.bind(this.initializeChildren, this));
-    },
-    showAbout: function() {
-      this.aboutForm.render();
-      return false;
     },
     spreadLove: function() {
       this.loveForm.render();

@@ -4,7 +4,7 @@
   var-primary:     #F5F5F5;
   var-link:        #E33B7E;
 
-  var-btn:         #403F3F;
+  var-btn:         #DDD;
 
   var-accent:      #E33B7E;
   var-accent-dark: #FF4290;
@@ -42,6 +42,7 @@ em {
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
+  letter-spacing: .5px;
   text-decoration: none;
   cursor: pointer;
   margin-bottom: 20px;
