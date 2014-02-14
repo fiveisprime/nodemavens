@@ -3,6 +3,11 @@ nodemavens
 
 An app for showing appreciation for those who inspire you.
 
+# About
+
+Built with Express, Mongoose, and Backbone. Hosted on
+[Modulus](https://modulus.io).
+
 # License
 
 The MIT License (MIT)
