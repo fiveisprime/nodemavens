@@ -18,12 +18,16 @@ module.exports = function(app, controller) {
         return next();
       }
 
-      var ip = req.headers['x-forwarded-for'].split(',')[0]
-        , ua = req.headers['user-agent'];
+      var ips = req.headers['x-forwarded-for'].split(',')
+        , ua  = req.headers['user-agent'];
 
-      console.log(new Date().toString(), ip);
+      console.log(new Date().toString(), ips);
 
-      if (blacklist.indexOf(ip) >= 0 || !ua || ua.indexOf('curl') >= 0) {
+      var blocked = blacklist.some(function(ip) {
+        return ips.indexOf(ip) >= 0;
+      });
+
+      if (blocked || !ua || ua.indexOf('curl') >= 0) {
         res.statusCode = 403;
         return res.json();
       }
