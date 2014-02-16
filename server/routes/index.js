@@ -5,6 +5,7 @@
 //
 
 var blacklist = JSON.parse(process.env.BLACKLIST || '[]');
+var ips = {};
 
 module.exports = function(app, controller) {
 
@@ -14,13 +15,20 @@ module.exports = function(app, controller) {
   app.all('/*', function(req, res, next) {
     if ('POST' === req.method) {
 
-      if (!req.headers['x-forwarded-for']) {
-        return next();
-      }
-
-      var ip = req.headers['x-forwarded-for'].split(',')[0]
+      var ip = req.ip
         , ua = req.headers['user-agent'];
-
+      
+      if (!ips[ip]) {
+        ips[ip] = 1;
+      } else {
+        ips[ip]++;
+      }
+        
+      if (ips[ip] >= 5) {
+        blacklist.push(ip);
+        console.error('[%s] add %s to blacklist', new Date().toString(), ip);
+      }
+      
       console.log(new Date().toString(), ip);
 
       if (blacklist.indexOf(ip) >= 0 || !ua || ua.indexOf('curl') >= 0) {
