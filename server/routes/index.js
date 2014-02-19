@@ -15,7 +15,8 @@ module.exports = function(app, controller) {
     if ('POST' === req.method) {
 
       if (!req.headers['x-forwarded-for']) {
-        return next();
+        res.statusCode = 500;
+        return res.json();
       }
 
       var ips = req.headers['x-forwarded-for'].split(',')
