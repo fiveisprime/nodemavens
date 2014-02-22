@@ -811,7 +811,7 @@ em {
   line-height: normal;
   padding: 8px 10px;
   background-color: #3EE49C;
-  color: #DDD;
+  color: #F5F5F5;
 }
 
 .btn:hover {
@@ -823,7 +823,7 @@ a.btn:hover {
 }
 
 a.btn:visited {
-  color: #DDD;
+  color: #F5F5F5;
 }
 
 input[type="submit"] {
