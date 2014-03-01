@@ -52,11 +52,9 @@ module.exports = function() {
       if (err) {
         deferred.reject(err);
       } else {
-        var result = [], i = 0;
-
-        for (; i < docs.length; i++) {
-          result.push(docs[i].toObject());
-        }
+        var result = docs.map(function (doc) {
+          return doc.toObject();
+        });
 
         deferred.resolve(result);
       }
@@ -76,11 +74,9 @@ module.exports = function() {
         if (err) {
           deferred.reject(err);
         } else {
-          var result = [], i = 0;
-
-          for (; i < docs.length; i++) {
-            result.push(docs[i].toObject());
-          }
+          var result = docs.map(function (doc) {
+            return doc.toObject();
+          });
 
           deferred.resolve(result);
         }
