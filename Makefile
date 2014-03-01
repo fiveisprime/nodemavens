@@ -8,11 +8,12 @@ LINT_SRC = public/javascripts/app.js app.js $(wildcard public/javascripts/lib/*.
 TEMPLATES = $(wildcard templates/*.handlebars)
 
 all: lint build min
-	@echo === Build Complete ===
+	@echo Build complete
 
 lint: $(LINT_SRC)
 	@node_modules/.bin/jshint \
-	--reporter node_modules/jshint-stylish/stylish.js \
+	--verbose \
+	--show-non-errors \
 	$^
 
 build:
