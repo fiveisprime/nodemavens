@@ -8,15 +8,15 @@ var mongoose = require('mongoose')
   , Q        = require('q');
 
 var mavenSchema = mongoose.Schema({
-  username: { type: String, required: true, index: true }
-, name: String
-, company: String
-, location: String
-, avatar_url: String
-, github_url: String
-, blog_url: String
-, date: { type: Date, default: new Date(), index: true }
-, love: Number
+  username   : { type: String, required: true, index: true }
+, name       : String
+, company    : String
+, location   : String
+, avatar_url : String
+, github_url : String
+, blog_url   : String
+, date       : { type: Date, default: new Date(), index: true }
+, love       : Number
 });
 
 var Maven = mongoose.model('Maven', mavenSchema);
@@ -37,10 +37,8 @@ module.exports = function() {
   //
   // MongoDB connection.
   //
-  mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/test');
-
-  var db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'mongoose error:'));
+  mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/test')
+    .connection.on('error', console.error.bind(console, 'mongoose error:'));
 
   //
   // Get the most recent additions.
@@ -124,14 +122,14 @@ module.exports = function() {
         });
       } else {
         Maven.create({
-          username: ghUser.login
-        , name: ghUser.name
-        , company: ghUser.company
-        , location: ghUser.location
-        , avatar_url: ghUser.avatar_url
-        , github_url: ghUser.html_url
-        , blog_url: ghUser.blog
-        , love: 1
+          username   : ghUser.login
+        , name       : ghUser.name
+        , company    : ghUser.company
+        , location   : ghUser.location
+        , avatar_url : ghUser.avatar_url
+        , github_url : ghUser.html_url
+        , blog_url   : ghUser.blog
+        , love       : 1
         },
         function(err, maven) {
           if (err) {
