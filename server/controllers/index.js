@@ -11,7 +11,7 @@ const GITHUB_ROOT_URL = 'https://api.github.com/users/';
 const UA_STRING       = 'fiveisprime/nodemavens';
 
 //
-// Helper for getting data from GitHub.
+// Helper for getting user data from GitHub.
 //
 var getGitHubUser = function(username) {
   var deferred = Q.defer(), retryCount = 1;
@@ -32,9 +32,12 @@ var getGitHubUser = function(username) {
 
   !function sendRequest() {
     request(opts, function(err, response, body) {
-      if (err) return deferred.reject(err);
+      if (err) {
+        return deferred.reject(err);
+      }
 
-      if (response.statusCode === 202 && retryCount++ <= 15) {
+      // Incomplete response, try up to 5 times.
+      if (response.statusCode === 202 && retryCount++ <= 5) {
         return setTimeout(sendRequest, 300);
       }
 
@@ -108,6 +111,11 @@ module.exports = function(models) {
     return deferred.promise;
   };
 
+  //
+  // Add some love to the specified user.
+  //
+  // If the username isn't found, a new user (maven) will be created.
+  //
   internals.love = function(username) {
     var deferred = Q.defer();
 

@@ -34,12 +34,12 @@ app.set('views', path.join(__dirname, 'server/views'));
 app.disable('x-powered-by');
 
 app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));
-// app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Bootstrap the models and controllers.
 var models = require('./server/models')()
   , controllers = require('./server/controllers')(models);
 
