@@ -4,9 +4,8 @@
 //     MIT Licensed
 //
 
-var blacklist = JSON.parse(process.env.BLACKLIST || '[]');
-
 module.exports = function(app, controller) {
+  var blacklist = JSON.parse(process.env.BLACKLIST || '[]');
 
   //
   // Disallow blacklisted IPs and verify the session count.
