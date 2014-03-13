@@ -14,8 +14,8 @@ module.exports = function(app, controller) {
     if ('POST' === req.method) {
 
       if (!req.headers['x-forwarded-for']) {
-        res.statusCode = 500;
-        return res.json();
+        // This occurs when running locally.
+        return next();
       }
 
       var ips = req.headers['x-forwarded-for'].split(',')
