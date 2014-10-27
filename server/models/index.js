@@ -38,7 +38,10 @@ module.exports = function() {
   // MongoDB connection.
   //
   mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/test')
-    .connection.on('error', console.error.bind(console, 'mongoose error:'));
+    .connection.on('error', function (err) {
+      console.error(err);
+      throw err;
+    });
 
   //
   // Get the most recent additions.
