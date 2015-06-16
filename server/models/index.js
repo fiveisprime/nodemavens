@@ -37,11 +37,11 @@ module.exports = function() {
   //
   // MongoDB connection.
   //
-  mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/test')
-    .connection.on('error', function (err) {
-      console.error(err);
-      throw err;
-    });
+  mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/test', {
+    server: {
+      auto_reconnect: true
+    }
+  }).connection;
 
   //
   // Get the most recent additions.
